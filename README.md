@@ -1,14 +1,11 @@
-flipCountDown
+Compteur Facebook pour TV
 ==============
-[Demo&Documentation][doc]
 
+Affiche un compteur de like facebook
 
-jQuery Plugin Flip Count Down Retro Clock
+Fait en dirty & dirty
 
-flipCountDown
+modifier count.php
+modifier index.html
 
-![ScreenShot](/screen/1.png)
-
-![ScreenShot](/screen/2.png)
-
-[doc]: http://xdsoft.net/jqplugins/flipcountdown/
+Joue les mp3 du grand detournement
