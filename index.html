@@ -51,12 +51,15 @@ jQuery(function($){
 		$('#retroclockbox_float').flipcountdown({size:'lg',tick:0});
 		});
 var old=0;
+var page = 'https://www.facebook.com/LuckyBird.fr'
 function   update(){ 
 	$.ajax({
-url : '/afficheur/flip/count.php',
+url : 'https://api.facebook.com/method/links.getStats?urls='+page+'&format=json',
 type : 'GET',
-dataType : 'html',
-success : function(nbr, statut){ // success est toujours en place, bien sûr !
+dataType : 'json',
+success : function(data, statut){ // success est toujours en place, bien sûr !
+//console.log(data);
+nbr=data[0].like_count;
 if(nbr != old){
 if(nbr > old){
 var audio = new Audio('win.mp3');
