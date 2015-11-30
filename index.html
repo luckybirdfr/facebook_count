@@ -1,0 +1,127 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<!--<base href="" /><!-- -->
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>jquery.flipCountDown Demo Flip Count Down Retro Clock </title>
+<meta name="description" content="retro flip clock plugin for jQuery.">
+<meta name="keywords" content="Плагин jQuery, retro часы, flip часы,jQuery, plugin, count down">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>-->
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.flipcountdown.js"></script>
+<link rel="stylesheet" type="text/css" href="jquery.flipcountdown.css" />
+
+<style>
+body {
+	background-color:black;
+padding:0px;
+margin:0px;
+}
+
+body div {
+zoom: 200%;
+}
+#bas {
+padding-left:35%;
+margin-top:5%;
+margin-left:0;
+margin-right:0;
+font-size:70px;
+color:white;
+background-color:black;
+}
+
+#retroclockbox_float {
+	background-color:#133783;
+
+}
+</style>
+<body>
+<div id="retroclockbox_float"></div>
+<div id="bas">
+<img src="souvenyr.png?a" style="width:50px;height:50px"/>
+<span id="visite">-</span>
+<span > | </span>
+<img src="fbapp.jpg?a" style="width:50px;height:50px"/>
+<span id="blog">-</span>
+</div>
+<script>
+jQuery(function($){
+		$('#retroclockbox_float').flipcountdown({size:'lg',tick:0});
+		});
+var old=0;
+function   update(){ 
+	$.ajax({
+url : '/afficheur/flip/count.php',
+type : 'GET',
+dataType : 'html',
+success : function(nbr, statut){ // success est toujours en place, bien sûr !
+if(nbr != old){
+if(nbr > old){
+var audio = new Audio('win.mp3');
+}else{
+var audio = new Audio('excuses.mp3');
+
+}
+
+audio.play();
+
+$('#retroclockbox_float').flipcountdown({size:'lg',tick:nbr});
+old=nbr;
+}
+
+},
+
+error : function(resultat, statut, erreur){
+
+	}
+
+});
+
+}
+
+
+function   blog(){ 
+	$.ajax({
+url : '/afficheur/flip/mozamis.php?random='+Math.random(),
+type : 'GET',
+dataType : 'html',
+success : function(nbr, statut){ // success est toujours en place, bien sûr !
+document.getElementById('blog').innerHTML = nbr;
+
+},
+
+error : function(resultat, statut, erreur){
+
+	}
+
+});
+
+}
+function   visite(){ 
+	$.ajax({
+url : '/afficheur/visite.txt?random='+Math.random(),
+type : 'GET',
+dataType : 'html',
+success : function(nbr, statut){ // success est toujours en place, bien sûr !
+document.getElementById('visite').innerHTML = nbr;
+
+},
+
+error : function(resultat, statut, erreur){
+
+	}
+
+});
+
+}
+
+
+
+setInterval(update,1000);
+setInterval(visite,1000);
+setInterval(blog,1000);
+
+</script>
+</body>
